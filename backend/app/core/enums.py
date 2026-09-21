@@ -18,6 +18,11 @@ class AttendanceStatus(str, Enum):
     LATE = "LATE"
     LEAVE = "LEAVE"
 
+class CorrectionStatus(str, Enum):
+    PENDING = "PENDING"
+    APPROVED = "APPROVED"
+    REJECTED = "REJECTED"
+
 class CourseStatus(str, Enum):
     DRAFT = "DRAFT"
     PUBLISHED = "PUBLISHED"

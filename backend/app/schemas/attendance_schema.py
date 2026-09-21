@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from uuid import UUID
 from pydantic import BaseModel
-from app.core.enums import AttendanceStatus
+from app.core.enums import AttendanceStatus, CorrectionStatus
 
 class AttendanceBase(BaseModel):
     course_id: UUID
@@ -21,6 +21,8 @@ class AttendanceRead(AttendanceBase):
     id: UUID
     student_name: str | None = None
     course_name: str | None = None
+    correction_status: CorrectionStatus | None = None
+    correction_id: UUID | None = None
     created_at: datetime
     updated_at: datetime
 

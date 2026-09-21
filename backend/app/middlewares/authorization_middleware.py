@@ -5,6 +5,8 @@ from app.core.enums import UserRole
 
 ADMIN_ONLY_PREFIXES = ("/api/audit",)
 TEACHER_WRITE_PREFIXES = ("/api/assignments", "/api/attendance")
+# 学生可访问的考勤相关路径：提交更正申请（审批动作仍仅教师/管理员）
+STUDENT_ATTENDANCE_ALLOWED_POST = "/api/attendance/corrections"
 
 class AuthorizationMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
@@ -15,6 +17,8 @@ class AuthorizationMiddleware(BaseHTTPMiddleware):
         if any(request.url.path.startswith(p) for p in ADMIN_ONLY_PREFIXES) and role != UserRole.ADMIN.value:
             return JSONResponse({"code": 403, "message": "Permission denied", "detail": None}, status_code=403)
         if request.method in {"POST", "PUT", "PATCH", "DELETE"} and any(request.url.path.startswith(p) for p in TEACHER_WRITE_PREFIXES):
-            if role not in {UserRole.ADMIN.value, UserRole.TEACHER.value}:
+            # 学生仅可对考勤更正发起申请，审批（/approve、/reject）在 Service 层强制教师/管理员
+            student_submit = request.method == "POST" and request.url.path == STUDENT_ATTENDANCE_ALLOWED_POST and role == UserRole.STUDENT.value
+            if not student_submit and role not in {UserRole.ADMIN.value, UserRole.TEACHER.value}:
                 return JSONResponse({"code": 403, "message": "Permission denied", "detail": None}, status_code=403)
         return await call_next(request)

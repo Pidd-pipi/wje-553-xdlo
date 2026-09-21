@@ -11,6 +11,7 @@ class UserRead(BaseModel):
     username: str
     full_name: str
     role: UserRole
+    student_id: UUID | None = None
 
     class Config:
         from_attributes = True

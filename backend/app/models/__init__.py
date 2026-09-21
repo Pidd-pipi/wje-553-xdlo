@@ -6,6 +6,7 @@ from .enrollment import Enrollment
 from .assignment import Assignment
 from .submission import Submission
 from .attendance import Attendance
+from .attendance_correction import AttendanceCorrection
 from .audit_log import AuditLog
 
-__all__ = ["Base", "User", "Student", "Course", "Enrollment", "Assignment", "Submission", "Attendance", "AuditLog"]
+__all__ = ["Base", "User", "Student", "Course", "Enrollment", "Assignment", "Submission", "Attendance", "AttendanceCorrection", "AuditLog"]

@@ -9,6 +9,8 @@ export const RoutePermissions = {
 export const ButtonPermissions = {
   createCourse: [UserRole.ADMIN, UserRole.TEACHER],
   changeAttendance: [UserRole.ADMIN, UserRole.TEACHER],
+  reviewCorrection: [UserRole.ADMIN, UserRole.TEACHER],
+  submitCorrection: [UserRole.STUDENT],
   modifyGrade: [UserRole.ADMIN, UserRole.TEACHER],
   enrollCourse: [UserRole.STUDENT],
 } as const;

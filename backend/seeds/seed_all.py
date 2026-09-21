@@ -28,6 +28,7 @@ try:
         assignment = Assignment(course_id=course.id, title='Pandas 清洗作业', type=AssignmentType.HOMEWORK, description='提交清洗报告和代码', deadline=datetime.now(timezone.utc)+timedelta(days=7), total_score=100, weight=0.2, status=AssignmentStatus.PUBLISHED)
         db.add(assignment)
         db.add(Attendance(course_id=course.id, student_id=student.id, date=date.today(), status=AttendanceStatus.PRESENT, remark='准时'))
+        db.add(Attendance(course_id=course.id, student_id=student.id, date=date.today()-timedelta(days=2), status=AttendanceStatus.ABSENT, remark='未到'))
         db.commit(); print('seed complete')
 finally:
     db.close()

@@ -1,2 +1,3 @@
-import type { AttendanceStatus } from '../constants/enums';
+import type { AttendanceStatus, CorrectionStatus } from '../constants/enums';
 export interface Attendance { id: string; course_id: string; student_id: string; course_name?: string; student_name?: string; date: string; status: AttendanceStatus; remark?: string; created_at: string; updated_at: string }
+export interface AttendanceCorrection { id: string; attendance_id: string; student_id: string; requested_status: AttendanceStatus; reason: string; status: CorrectionStatus; reviewer_id?: string; review_comment?: string; reviewed_at?: string; created_at: string; updated_at: string; student_name?: string; course_name?: string; attendance_date?: string; current_status?: AttendanceStatus; reviewer_name?: string }

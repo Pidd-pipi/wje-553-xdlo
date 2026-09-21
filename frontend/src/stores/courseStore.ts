@@ -1,0 +1,4 @@
+import { defineStore } from 'pinia';
+import { courseApi } from '../api/courses';
+import type { Course } from '../types/course';
+export const useCourseStore = defineStore('courses', { state: () => ({ items: [] as Course[], current: null as Course | null, loading: false }), actions: { async fetch(params?: Record<string,string>) { this.loading = true; try { this.items = await courseApi.list(params); } finally { this.loading = false; } }, async fetchOne(id: string) { this.current = await courseApi.get(id); }, async updateStatus(id: string, status: Course['status']) { await courseApi.update(id, { status }); await this.fetch(); }, async enroll(courseId: string, studentId: string) { await courseApi.enroll(courseId, studentId); await this.fetch(); }, async drop(courseId: string, studentId: string) { await courseApi.drop(courseId, studentId); await this.fetch(); } } });

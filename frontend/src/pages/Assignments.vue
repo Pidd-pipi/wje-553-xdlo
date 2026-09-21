@@ -1,0 +1,4 @@
+<script setup lang="ts">
+import { onMounted } from 'vue'; import StatusTag from '../components/common/StatusTag.vue'; import ScoreDisplay from '../components/common/ScoreDisplay.vue'; import { useAssignmentStore } from '../stores/assignmentStore';
+const store = useAssignmentStore(); onMounted(()=>store.fetch());
+</script><template><section class="page"><header><h2>作业中心</h2><el-button v-permission="['ADMIN','TEACHER']" type="primary">发布作业</el-button></header><el-table :data="store.items"><el-table-column prop="course_name" label="课程"/><el-table-column prop="title" label="作业"/><el-table-column prop="type" label="类型"/><el-table-column label="状态"><template #default="{row}"><StatusTag :status="row.status" type="assignment"/></template></el-table-column><el-table-column label="满分"><template #default="{row}"><ScoreDisplay :score="row.total_score" :total-score="row.total_score" /></template></el-table-column></el-table></section></template>

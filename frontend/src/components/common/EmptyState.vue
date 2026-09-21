@@ -1,0 +1,1 @@
+<script setup lang="ts">defineProps<{ message: string; icon?: string }>();</script><template><el-empty :description="message"><template #image><el-icon size="54"><component :is="icon || 'Document'" /></el-icon></template></el-empty></template>

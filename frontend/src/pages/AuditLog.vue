@@ -1,0 +1,4 @@
+<script setup lang="ts">
+import { onMounted, ref } from 'vue'; import { auditApi } from '../api/audit'; import type { AuditLog } from '../types/common';
+const logs = ref<AuditLog[]>([]); onMounted(async()=> logs.value = await auditApi.list());
+</script><template><section class="page"><header><h2>操作日志</h2></header><el-table :data="logs"><el-table-column prop="created_at" label="时间"/><el-table-column prop="action" label="操作"/><el-table-column prop="target_type" label="对象"/><el-table-column prop="target_id" label="对象 ID"/><el-table-column label="变更"><template #default="{row}"><code>{{ row.before_data }} -> {{ row.after_data }}</code></template></el-table-column></el-table></section></template>

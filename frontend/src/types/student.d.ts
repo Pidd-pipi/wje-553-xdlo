@@ -1,0 +1,1 @@
+export interface Student { id: string; student_no: string; name: string; grade?: string; class_name?: string; phone?: string; email?: string; enroll_date?: string; user_id?: string; created_at: string; updated_at: string }

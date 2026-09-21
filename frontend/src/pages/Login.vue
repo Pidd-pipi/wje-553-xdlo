@@ -1,0 +1,5 @@
+<script setup lang="ts">
+import { reactive } from 'vue'; import { useRouter } from 'vue-router'; import { useAuthStore } from '../stores/authStore';
+const form = reactive({ username: 'admin', password: 'admin123' }); const router = useRouter(); const auth = useAuthStore();
+async function submit(){ await auth.login(form.username, form.password); router.push('/courses'); }
+</script><template><main class="login"><section><h1>CampusHub</h1><p>校园培训管理系统</p><el-form @submit.prevent><el-input v-model="form.username" placeholder="用户名" /><el-input v-model="form.password" type="password" placeholder="密码" show-password /><el-button type="primary" @click="submit">登录</el-button></el-form><small>admin/admin123 · teacher/teacher123 · student/student123</small></section></main></template><style scoped>.login{min-height:100vh;display:grid;place-items:center;background:#eef3f1}section{width:min(420px,92vw);padding:40px;background:#fbfcfa;border:1px solid #d5ddd8;border-radius:8px}h1{margin:0;font-size:38px;color:#18352c}p{color:#50655e}.el-form{display:grid;gap:14px}small{display:block;margin-top:18px;color:#687a73}</style>
